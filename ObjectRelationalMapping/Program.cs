@@ -10,7 +10,12 @@ namespace ObjectRelationalMapping
         public static void Main(string[] args){
             Console.WriteLine("Starting");
 
-            if(args.Length == 0) return;
+
+            if(args.Length == 0){
+                Console.WriteLine("No arguments given");
+                PrintHelp();
+                return;
+            }
 
             connection.Open();
 
@@ -22,20 +27,46 @@ namespace ObjectRelationalMapping
                 case "Add":
                     Console.WriteLine("Adding user");
                     AddUser(args[1]);
+                    PrintUsers();
                     break;
                 case "Remove":
                     Console.WriteLine("Removing user");
                     RemoveUser(args[1]);
+                    PrintUsers();
                     break;
                 case "Print":
                     Console.WriteLine("Printing users");
                     PrintUsers();
                     break;
+                case "Build":
+                    Console.WriteLine("Building user");
+                    BuildUser();
+                    PrintUsers();
+                    break;
+                case "Clear":
+                    Console.WriteLine("Clearing users table");
+                    ClearUsers();
+                    PrintUsers();
+                    break;
+                case "Help":
+                    PrintHelp();
+                    break;
                 default:
+                    Console.WriteLine("Unrecognized argument: '" + args[0] + "'");
+                    PrintHelp();
                     break;
             }
 
             Console.WriteLine("Finished");
+        }
+
+        static void PrintHelp(){
+            Console.WriteLine("Create - Create a a user table if there isn't one");
+            Console.WriteLine("Add username - Adds a user with the given username and email of username@gmail.com");
+            Console.WriteLine("Remove userId - Removes user with the given userId if there is one");
+            Console.WriteLine("Print - Prints the user table");
+            Console.WriteLine("Build - Walks through building a user");
+            Console.WriteLine("Help - Displays this message");
         }
 
         static void CreateUserTable(){
@@ -50,15 +81,23 @@ namespace ObjectRelationalMapping
         }
 
         static void AddUser(string username){
-            var insertCommand = connection.CreateCommand();
-            insertCommand.CommandText = @"INSERT INTO Users (Name, Email)
-                VALUES(@name, @email)
-            ";
+            var command = connection.CreateCommand();
+            command.CommandText = @"INSERT INTO Users (Name, Email) VALUES(@name, @email)";
 
-            insertCommand.Parameters.AddWithValue("@name", username);
-            insertCommand.Parameters.AddWithValue("@email", username + "@gmail.com");
+            command.Parameters.AddWithValue("@name", username);
+            command.Parameters.AddWithValue("@email", username + "@gmail.com");
 
-            insertCommand.ExecuteNonQuery();
+            command.ExecuteNonQuery();
+        }
+
+        static void AddUser(User user){
+            var command = connection.CreateCommand();
+            command.CommandText = @"INSERT INTO Users (Name, Email) VALUES(@name, @email)";
+
+            command.Parameters.AddWithValue("@name", user.name);
+            command.Parameters.AddWithValue("@email", user.email);
+
+            command.ExecuteNonQuery();
         }
 
         static void RemoveUser(string idString){
@@ -73,28 +112,63 @@ namespace ObjectRelationalMapping
         }
 
         static void PrintUsers(){
-            var selectCommand = connection.CreateCommand();
-            selectCommand.CommandText = "SELECT Id, Name, Email FROM Users;";
+            var command = connection.CreateCommand();
+            command.CommandText = "SELECT Id, Name, Email FROM Users;";
 
             List<User> users = new List<User>();
-
-            var reader = selectCommand.ExecuteReader();
+            var reader = command.ExecuteReader();
             while(reader.Read()){
                 var user = new User(reader.GetInt16(0), reader.GetString(1), reader.GetString(2));
                 users.Add(user);
             }
 
+            Console.WriteLine("New Users Table:");
             foreach(User user in users){
                 string toPrint = user.id + " " + user.name + " " + user.email;
                 Console.WriteLine(toPrint);
             }
         }
+
+        static void BuildUser(){
+            User newUser = new User();
+            Console.WriteLine("ID is autocremented");
+            
+            string? name;
+            while(true){
+                Console.WriteLine("Please give a name:");
+                name = Console.ReadLine();
+                if(!string.IsNullOrWhiteSpace(name)){
+                    break;
+                }
+            }
+            newUser.name = name;
+
+            string? email;
+            while(true){
+                Console.WriteLine("Please give an email:");
+                email = Console.ReadLine();
+                if(!string.IsNullOrWhiteSpace(name)){
+                    break;
+                }
+            }
+            newUser.email = email;
+
+            AddUser(newUser);
+        }
+
+        static void ClearUsers(){
+            var command = connection.CreateCommand();
+            command.CommandText = @"DELETE FROM Users; DELETE FROM sqlite_sequence WHERE name='Users';"; 
+            command.ExecuteNonQuery();
+        }
     }
 
     public class User{
-        public int id;
-        public string name;
-        public string email;
+        public int? id;
+        public string? name;
+        public string? email;
+
+        public User(){}
 
         public User(int id_, string name_, string email_){
             id = id_;

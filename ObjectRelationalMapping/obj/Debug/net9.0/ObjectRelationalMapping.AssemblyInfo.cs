@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ObjectRelationalMapping")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6aab128c51967bd7838af49ef06633f6e3f52b27")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56598b1781a7532b39cd4bf618efbec05088ddc5")]
 [assembly: System.Reflection.AssemblyProductAttribute("ObjectRelationalMapping")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ObjectRelationalMapping")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

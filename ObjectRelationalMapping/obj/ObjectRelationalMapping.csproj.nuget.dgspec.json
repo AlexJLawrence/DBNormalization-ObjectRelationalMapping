@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\ObjectRelationalMapping\\ObjectRelationalMapping.csproj": {}
+    "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\objectrelationalmapping\\ObjectRelationalMapping.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\ObjectRelationalMapping\\ObjectRelationalMapping.csproj": {
+    "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\objectrelationalmapping\\ObjectRelationalMapping.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\ObjectRelationalMapping\\ObjectRelationalMapping.csproj",
+        "projectUniqueName": "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\objectrelationalmapping\\ObjectRelationalMapping.csproj",
         "projectName": "ObjectRelationalMapping",
-        "projectPath": "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\ObjectRelationalMapping\\ObjectRelationalMapping.csproj",
+        "projectPath": "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\objectrelationalmapping\\ObjectRelationalMapping.csproj",
         "packagesPath": "C:\\Users\\alexj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\ObjectRelationalMapping\\obj\\",
+        "outputPath": "C:\\Users\\alexj\\Documents\\GitHub\\DBNormalization-ObjectRelationalMapping\\objectrelationalmapping\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
